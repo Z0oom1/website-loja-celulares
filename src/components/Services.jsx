@@ -14,7 +14,7 @@ const Services = () => {
 
   return (
     <section ref={containerRef} id="services" className="py-32 relative bg-zinc-950 overflow-hidden">
-      {/* Dynamic Background Decor */}
+      {/* Decoração de Fundo Dinâmica */}
       <motion.div 
         style={{ y: blobY1 }}
         className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-600/5 rounded-full blur-[120px] pointer-events-none" 
@@ -37,7 +37,7 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
-          {/* Main big card */}
+          {/* Card principal grande */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -64,7 +64,7 @@ const Services = () => {
             </div>
           </motion.div>
 
-          {/* Side cards */}
+          {/* Cards laterais */}
           <div className="flex flex-col gap-6">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}

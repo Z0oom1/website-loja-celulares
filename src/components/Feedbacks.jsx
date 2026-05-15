@@ -57,7 +57,7 @@ const Feedbacks = () => {
     }
   };
 
-  // Logic to detect if we can scroll more (simplified for brevity)
+  // Lógica para detectar se podemos rolar mais (simplificada para brevidade)
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
@@ -71,7 +71,7 @@ const Feedbacks = () => {
 
   return (
     <section id="feedbacks" className="py-32 bg-zinc-950 relative overflow-hidden">
-      {/* Background Decor */}
+      {/* Decoração de Fundo */}
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,105,0,0.05),transparent_70%)]" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
@@ -116,7 +116,7 @@ const Feedbacks = () => {
           </div>
         </div>
 
-        {/* Carousel Container */}
+        {/* Container do Carrossel */}
         <div 
           ref={carouselRef}
           onScroll={onScroll}
@@ -175,7 +175,7 @@ const Feedbacks = () => {
           ))}
         </div>
 
-        {/* Action Button */}
+        {/* Botão de Ação */}
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -188,7 +188,7 @@ const Feedbacks = () => {
         </motion.div>
       </div>
 
-      {/* Feedback Modal */}
+      {/* Modal de Feedback */}
       <AnimatePresence>
         {selectedFeedback && (
           <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">

@@ -9,7 +9,7 @@ import CustomCursor from './components/CustomCursor';
 
 function App() {
   useEffect(() => {
-    // Force dark mode
+    // Forçar modo escuro
     document.documentElement.classList.add('dark');
     document.body.style.backgroundColor = '#09090b';
   }, []);

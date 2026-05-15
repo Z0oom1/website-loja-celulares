@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, CaretLeft, CaretRight, ShoppingCartSimple, CheckCircle, PaperPlaneTilt } from '@phosphor-icons/react';
 
 const ProductModal = ({ isOpen, onClose, product }) => {
-  const [currentStep, setCurrentStep] = useState('detail'); // 'detail' or 'checkout'
+  const [currentStep, setCurrentStep] = useState('detail'); // 'detail' (detalhe) ou 'checkout' (finalização)
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [submitted, setSubmitted] = useState(false);
 
@@ -28,7 +28,7 @@ const ProductModal = ({ isOpen, onClose, product }) => {
 
   const renderDetail = () => (
     <div className="flex flex-col lg:flex-row gap-8">
-      {/* Image Slider */}
+      {/* Slider de Imagem */}
       <div className="w-full lg:w-1/2 aspect-square relative rounded-3xl overflow-hidden bg-zinc-800">
         <AnimatePresence mode="wait">
           <motion.img
@@ -76,7 +76,7 @@ const ProductModal = ({ isOpen, onClose, product }) => {
         </div>
       </div>
 
-      {/* Info Content */}
+      {/* Conteúdo de Informação */}
       <div className="w-full lg:w-1/2 flex flex-col justify-between">
         <div>
           <h3 className="text-3xl font-medium text-zinc-100 mb-2">{product.name}</h3>

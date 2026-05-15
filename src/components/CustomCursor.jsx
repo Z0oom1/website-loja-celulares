@@ -12,15 +12,15 @@ const CustomCursor = () => {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Shortcut: Ctrl + Shift + 3
-      // Using code for better reliability across layouts
+      // Atalho: Ctrl + Shift + 3
+      // Usando 'code' para melhor confiabilidade em diferentes layouts de teclado
       if (e.ctrlKey && e.shiftKey && (e.code === 'Digit3' || e.key === '3')) {
-        e.preventDefault(); // Prevent browser default actions if any
+        e.preventDefault(); // Impede ações padrão do navegador, se houver
         setIsDisabled(prev => {
           const next = !prev;
           document.documentElement.style.cursor = next ? 'auto' : 'none';
           
-          // Reset internal states
+          // Reseta estados internos
           setIsPointer(false);
           setIsBlocked(false);
 
@@ -49,7 +49,7 @@ const CustomCursor = () => {
       const computedStyle = window.getComputedStyle(hoveredElement);
       const cursorType = computedStyle.cursor;
 
-      // Ensure we only set pointer state if it's actually over a link/button
+      // Garante que só definimos o estado 'pointer' se estiver realmente sobre um link/botão
       const isActuallyPointer = cursorType === 'pointer' || 
                                 hoveredElement.tagName === 'A' || 
                                 hoveredElement.tagName === 'BUTTON' ||
@@ -75,7 +75,7 @@ const CustomCursor = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[9999] hidden md:block">
-      {/* Main Dot */}
+      {/* Ponto Principal */}
       <motion.div
         style={{
           x: mouseX,
@@ -90,7 +90,7 @@ const CustomCursor = () => {
         className="w-3 h-3 rounded-full fixed top-0 left-0 shadow-[0_0_15px_rgba(255,105,0,0.3)]"
       />
 
-      {/* Outer Ring */}
+      {/* Anel Externo */}
       <motion.div
         style={{
           x: mouseX,
@@ -106,7 +106,7 @@ const CustomCursor = () => {
         className="w-8 h-8 rounded-full border border-orange-500 fixed top-0 left-0"
       />
 
-      {/* Blocked Indicator */}
+      {/* Indicador de Bloqueio */}
       {isBlocked && (
         <motion.div
           style={{

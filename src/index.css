@@ -7,7 +7,7 @@
     --background: #f9fafb;
     --foreground: #09090b;
     --border: #e2e8f0;
-    --accent: #f97316; /* Orange 500 */
+    --accent: #f97316; /* Laranja 500 */
   }
   .dark {
     --background: #09090b;
@@ -32,7 +32,7 @@
   }
 }
 
-/* Taste Skill: Hardware Acceleration & Perpetual Elements */
+/* Estética: Aceleração de Hardware e Elementos Perpétuos */
 .liquid-glass {
   @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)];
 }
@@ -46,7 +46,7 @@
   will-change: transform, opacity;
 }
 
-/* Smooth scrolling & Cursor hide */
+/* Rolagem suave e ocultação do cursor */
 @media (min-width: 768px) {
   html, a, button, [role="button"], input, textarea, .group {
     cursor: none !important;
@@ -69,7 +69,7 @@ html {
   background-image: url('https://grainy-gradients.vercel.app/noise.svg');
 }
 
-/* Global Scrollbar Styling */
+/* Estilização Global da Barra de Rolagem */
 ::-webkit-scrollbar {
   width: 16px;
   height: 16px;
@@ -89,13 +89,13 @@ html {
   background: #FF6900;
 }
 
-/* Firefox support */
+/* Suporte para Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: #27272a #09090b;
 }
 
-/* Custom Scrollbar for modals/containers */
+/* Barra de Rolagem Personalizada para modais/containers */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }

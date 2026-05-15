@@ -109,7 +109,7 @@ const ProductsGrid = () => {
 
   return (
     <section ref={containerRef} id="products" className="py-32 relative overflow-hidden">
-      {/* Dynamic Background Decor */}
+      {/* Decoração de Fundo Dinâmica */}
       <motion.div 
         style={{ y: blobY1 }}
         className="absolute top-0 left-0 w-[500px] h-[500px] bg-orange-600/5 rounded-full blur-[130px] pointer-events-none" 
@@ -127,7 +127,7 @@ const ProductsGrid = () => {
           </div>
           
           <div className="flex flex-col gap-4 w-full md:w-auto">
-            {/* Search Bar */}
+            {/* Barra de Busca */}
             <div className="relative group max-w-md">
               <MagnifyingGlass size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-orange-500 transition-colors" />
               <input 
@@ -139,7 +139,7 @@ const ProductsGrid = () => {
               />
             </div>
 
-            {/* Filter Chips */}
+            {/* Botões de Filtro (Chips) */}
             <div className="flex flex-wrap gap-2">
               {categories.map(cat => (
                 <button
@@ -170,12 +170,12 @@ const ProductsGrid = () => {
             onClick={() => setSelectedProduct(product)}
           >
             <div className="aspect-[4/5] w-full rounded-[2.5rem] bg-zinc-900 border border-zinc-800/50 overflow-hidden relative mb-4 transition-all duration-500 group-hover:border-orange-500/30 flex items-center justify-center">
-              {/* Product Image */}
+              {/* Imagem do Produto */}
               <div className="absolute inset-0 opacity-60 mix-blend-luminosity group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
                 <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
               </div>
 
-              {/* Tags Container */}
+              {/* Container de Tags */}
               <div className="absolute top-6 left-6 right-6 flex justify-between items-start z-20">
                 <div className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-md border ${
                   product.status === 'disponivel' 
@@ -192,7 +192,7 @@ const ProductsGrid = () => {
                 )}
               </div>
               
-              {/* Overlay Glass */}
+              {/* Vidro de Sobreposição (Glass Effect) */}
               <div className="absolute bottom-6 left-6 right-6 liquid-glass rounded-2xl p-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 z-20">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-semibold text-white">Ver Especificações</span>
@@ -200,7 +200,7 @@ const ProductsGrid = () => {
                 </div>
               </div>
 
-              {/* Sold Overlays on images effect */}
+              {/* Efeito de sobreposição para itens vendidos */}
               {product.status === 'vendido' && (
                 <div className="absolute inset-0 bg-zinc-950/40 backdrop-grayscale flex items-center justify-center z-10">
                   <div className="border-4 border-zinc-500/30 p-4 rounded-full opacity-20">

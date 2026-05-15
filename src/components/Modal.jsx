@@ -7,7 +7,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          {/* Backdrop */}
+          {/* Fundo Escurecido (Backdrop) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -16,7 +16,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
             className="absolute inset-0 bg-zinc-950/60 backdrop-blur-md"
           />
 
-          {/* Modal Container */}
+          {/* Container do Modal */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -24,7 +24,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="relative w-full max-w-lg bg-zinc-900 border border-zinc-800 rounded-[2.5rem] overflow-hidden shadow-2xl z-10"
           >
-            {/* Header */}
+            {/* Cabeçalho */}
             <div className="flex items-center justify-between p-8 border-b border-zinc-800">
               <h3 className="text-2xl font-medium text-zinc-100">{title}</h3>
               <button 
@@ -35,7 +35,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
               </button>
             </div>
 
-            {/* Content */}
+            {/* Conteúdo */}
             <div className="p-8">
               {children}
             </div>

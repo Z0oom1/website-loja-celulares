@@ -16,7 +16,7 @@ const Hero = () => {
   const frameCount = 120;
   const currentFrame = (index) => `/images/frames/frame_${index.toString().padStart(5, '0')}.png`;
 
-  // Scroll tracking
+  // Rastreamento de rolagem
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -24,7 +24,7 @@ const Hero = () => {
 
   const imagesRef = useRef([]);
 
-  // Preload images
+  // Pré-carregamento de imagens
   useEffect(() => {
     const preloadImages = async () => {
       const loadedImages = [];
@@ -44,7 +44,7 @@ const Hero = () => {
       imagesRef.current = loadedImages;
       setIsLoaded(true);
       
-      // Draw first frame
+      // Desenhar o primeiro frame
       renderCanvas(0);
     };
 
@@ -61,7 +61,7 @@ const Hero = () => {
     const img = loadedImages[index];
     
     if (img) {
-      // Set canvas size once based on image
+      // Define o tamanho do canvas uma vez com base na imagem
       if (canvas.width !== img.width) {
         canvas.width = img.width;
         canvas.height = img.height;
@@ -72,7 +72,7 @@ const Hero = () => {
     }
   };
 
-  // Update canvas on scroll
+  // Atualiza o canvas ao rolar
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (!isLoaded) return;
     const frameIndex = Math.min(
@@ -82,15 +82,15 @@ const Hero = () => {
     renderCanvas(frameIndex);
   });
 
-  // Opacity for hero text
+  // Opacidade para o texto do hero
   const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const textY = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
 
   return (
     <div ref={containerRef} className="relative h-[400vh] bg-zinc-950">
-      {/* Sticky Container */}
+      {/* Container Fixo (Sticky) */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        {/* Background Decor - Blobs moved inside sticky to stay with video */}
+        {/* Decoração de fundo - Blobs movidos para dentro do sticky para acompanhar o vídeo */}
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-orange-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-orange-600/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -108,11 +108,11 @@ const Hero = () => {
           className="absolute inset-0 w-full h-full object-cover opacity-60 pt-[120px]"
         />
         
-        {/* Overlays */}
+        {/* Camadas de Sobreposição (Overlays) */}
         <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-transparent to-transparent z-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/20 via-transparent to-zinc-950 z-10" />
         
-        {/* Hero Content */}
+        {/* Conteúdo do Hero */}
         <motion.div 
           style={{ opacity: textOpacity, y: textY }}
           className="relative z-20 h-full flex items-start pt-[120px]"

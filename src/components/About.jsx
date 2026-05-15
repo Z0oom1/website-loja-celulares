@@ -5,13 +5,13 @@ import { MapPin, Clock, Phone, InstagramLogo, WhatsappLogo } from '@phosphor-ico
 const About = () => {
   return (
     <section id="about" className="py-32 bg-zinc-950 relative overflow-hidden">
-      {/* Background Decor */}
+      {/* Decoração de Fundo */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
-          {/* Company Info */}
+          {/* Informações da Empresa */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -63,7 +63,7 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Map Embed */}
+          {/* Mapa Integrado */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -72,7 +72,7 @@ const About = () => {
             className="relative"
           >
             <div className="aspect-square w-full rounded-[3rem] overflow-hidden border border-zinc-800 shadow-2xl relative">
-              {/* Overlay for glass effect */}
+              {/* Sobreposição para efeito de vidro (glass effect) */}
               <div className="absolute inset-0 pointer-events-none border-[12px] border-zinc-950/40 rounded-[3rem] z-10" />
               
               <iframe 
@@ -86,7 +86,7 @@ const About = () => {
               />
             </div>
             
-            {/* Location Badge */}
+            {/* Badge de Localização */}
             <div className="absolute -bottom-6 -right-6 md:right-12 liquid-glass p-6 rounded-3xl border border-white/10 shadow-2xl z-20 hidden md:block">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-orange-500 flex items-center justify-center text-zinc-950 shadow-lg shadow-orange-500/20">
