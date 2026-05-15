@@ -37,9 +37,17 @@ const ProductModal = ({ isOpen, onClose, product }) => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover transition-all duration-700 ${product.status === 'vendido' ? 'grayscale' : ''}`}
           />
         </AnimatePresence>
+
+        {product.status === 'vendido' && (
+          <div className="absolute inset-0 bg-zinc-950/20 flex items-center justify-center pointer-events-none z-10">
+            <div className="bg-red-500 text-white text-xs font-black px-4 py-2 rounded-lg rotate-12 shadow-2xl border-2 border-white/20 scale-150">
+              VENDIDO
+            </div>
+          </div>
+        )}
         
         {images.length > 1 && (
           <>
@@ -93,10 +101,15 @@ const ProductModal = ({ isOpen, onClose, product }) => {
             <p className="text-3xl font-mono font-medium text-orange-500">{product.price}</p>
           </div>
           <button 
+            disabled={product.status === 'vendido'}
             onClick={() => setCurrentStep('checkout')}
-            className="h-14 px-8 rounded-full bg-zinc-100 text-zinc-950 font-medium hover:bg-orange-500 transition-colors flex items-center gap-2"
+            className={`h-14 px-8 rounded-full font-medium transition-all flex items-center gap-2 ${
+              product.status === 'vendido'
+                ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed border border-zinc-700'
+                : 'bg-zinc-100 text-zinc-950 hover:bg-orange-500'
+            }`}
           >
-            Comprar Agora
+            {product.status === 'vendido' ? 'Produto Indisponível' : 'Comprar Agora'}
             <ShoppingCartSimple size={20} weight="bold" />
           </button>
         </div>

@@ -41,9 +41,10 @@ const Navbar = () => {
             </div>
 
             <div className="hidden md:flex items-center gap-8">
-              <a href="#services" className="text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors">Serviços</a>
-              <a href="#products" className="text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors">Loja</a>
-              <a href="#about" className="text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors">Nosso Laboratório</a>
+              <a href="#services" className="text-sm font-medium text-zinc-400 hover:text-orange-500 transition-colors">Serviços</a>
+              <a href="#products" className="text-sm font-medium text-zinc-400 hover:text-orange-500 transition-colors">Loja</a>
+              <a href="#feedbacks" className="text-sm font-medium text-zinc-400 hover:text-orange-500 transition-colors">Feedbacks</a>
+              <a href="#about" className="text-sm font-medium text-zinc-400 hover:text-orange-500 transition-colors">Sobre</a>
               <MagneticButton>
                 <button 
                   onClick={() => setRepairModalOpen(true)}

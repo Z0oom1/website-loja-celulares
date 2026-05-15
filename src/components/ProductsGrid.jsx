@@ -1,14 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { DeviceMobile, Headset, BatteryCharging, ArrowRight, Desktop } from '@phosphor-icons/react';
+import { DeviceMobile, Headset, BatteryCharging, ArrowRight, Desktop, MagnifyingGlass, Funnel, Tag } from '@phosphor-icons/react';
 import ProductModal from './ProductModal';
 
 const products = [
   { 
     id: 1, 
     name: 'iPhone 15 Pro Max', 
-    category: 'Apple • Titânio Natural', 
+    category: 'iPhone', 
     price: 'R$ 7.499', 
+    status: 'disponivel',
+    date: '2024-05-14',
     icon: DeviceMobile,
     images: [
       '/images/iphone_front.png',
@@ -25,8 +27,10 @@ const products = [
   { 
     id: 2, 
     name: 'MacBook Air M2', 
-    category: 'Portáteis • Meia-noite', 
+    category: 'Mac', 
     price: 'R$ 8.999', 
+    status: 'disponivel',
+    date: '2024-05-12',
     icon: Desktop,
     images: [
       '/images/m2/macbookm2.jpg',
@@ -43,8 +47,10 @@ const products = [
   { 
     id: 3, 
     name: 'Apple Watch Series 9', 
-    category: 'Wearables • Estelar', 
+    category: 'Watch', 
     price: 'R$ 3.299', 
+    status: 'vendido',
+    date: '2024-05-10',
     icon: BatteryCharging,
     images: [
       '/images/watch/watch.jpg',
@@ -60,8 +66,10 @@ const products = [
   { 
     id: 4, 
     name: 'AirPods Pro (2ª Ger)', 
-    category: 'Apple • USB-C', 
+    category: 'Audio', 
     price: 'R$ 1.599', 
+    status: 'disponivel',
+    date: '2024-05-15',
     icon: Headset,
     images: [
       '/images/airpods/airpods1.jpg',
@@ -79,7 +87,17 @@ const products = [
 
 const ProductsGrid = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeCategory, setActiveCategory] = useState('Todos');
   const containerRef = useRef(null);
+
+  const categories = ['Todos', 'iPhone', 'Mac', 'Watch', 'Audio'];
+
+  const filteredProducts = products.filter(product => {
+    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = activeCategory === 'Todos' || product.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  });
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -102,48 +120,108 @@ const ProductsGrid = () => {
       />
 
       <div className="max-w-7xl mx-auto w-full px-4 md:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-        <div>
-          <h2 className="text-sm font-mono text-orange-500 uppercase tracking-widest mb-4">Estoque de Renovados</h2>
-          <h3 className="text-4xl md:text-5xl font-medium tracking-tight text-zinc-100">Hardware premium.<br/>Sem concessões.</h3>
-        </div>
-        <button className="flex items-center gap-2 text-zinc-400 hover:text-zinc-100 transition-colors group">
-          Ver todos os produtos 
-          <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-        </button>
-      </div>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+          <div>
+            <h2 className="text-sm font-mono text-orange-500 uppercase tracking-widest mb-4">Estoque de Renovados</h2>
+            <h3 className="text-4xl md:text-5xl font-medium tracking-tight text-zinc-100">Hardware premium.<br/>Sem concessões.</h3>
+          </div>
+          
+          <div className="flex flex-col gap-4 w-full md:w-auto">
+            {/* Search Bar */}
+            <div className="relative group max-w-md">
+              <MagnifyingGlass size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-orange-500 transition-colors" />
+              <input 
+                type="text" 
+                placeholder="Buscar modelo..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full h-12 pl-12 pr-4 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-zinc-100 focus:outline-none focus:border-orange-500/50 transition-all placeholder:text-zinc-600"
+              />
+            </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {products.map((product, index) => (
+            {/* Filter Chips */}
+            <div className="flex flex-wrap gap-2">
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+                    activeCategory === cat 
+                      ? 'bg-orange-500 text-zinc-950' 
+                      : 'bg-zinc-900 text-zinc-400 hover:text-zinc-100 border border-zinc-800'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {filteredProducts.map((product, index) => (
           <motion.div
             key={product.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
-            className="group cursor-pointer"
+            layout
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: index * 0.05 }}
+            className={`group cursor-pointer ${product.status === 'vendido' ? 'grayscale opacity-70' : ''}`}
             onClick={() => setSelectedProduct(product)}
           >
-            <div className="aspect-[4/5] w-full rounded-[2rem] bg-zinc-900 border border-zinc-800/50 overflow-hidden relative mb-4 transition-colors group-hover:border-zinc-700/50 flex items-center justify-center">
-              <div className="absolute inset-0 opacity-40 mix-blend-luminosity group-hover:opacity-60 transition-opacity">
+            <div className="aspect-[4/5] w-full rounded-[2.5rem] bg-zinc-900 border border-zinc-800/50 overflow-hidden relative mb-4 transition-all duration-500 group-hover:border-orange-500/30 flex items-center justify-center">
+              {/* Product Image */}
+              <div className="absolute inset-0 opacity-60 mix-blend-luminosity group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
                 <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
               </div>
-              
-              <Desktop size={64} weight="thin" className="text-zinc-100/20 group-hover:text-orange-500 group-hover:scale-110 transition-all duration-500 relative z-10" />
-              
-              <div className="absolute bottom-4 left-4 right-4 liquid-glass rounded-xl p-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                <span className="text-sm font-medium text-zinc-100 flex items-center justify-center gap-2">
-                  Ver Detalhes <ArrowRight size={16} />
-                </span>
+
+              {/* Tags Container */}
+              <div className="absolute top-6 left-6 right-6 flex justify-between items-start z-20">
+                <div className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-md border ${
+                  product.status === 'disponivel' 
+                    ? 'bg-orange-500/20 text-orange-400 border-orange-500/20' 
+                    : 'bg-zinc-800/80 text-zinc-400 border-white/5'
+                }`}>
+                  {product.status}
+                </div>
+                
+                {product.status === 'vendido' && (
+                  <div className="bg-red-500 text-white text-[10px] font-black px-2 py-1 rounded rotate-12 shadow-xl border-2 border-white/20">
+                    SOLD OUT
+                  </div>
+                )}
               </div>
+              
+              {/* Overlay Glass */}
+              <div className="absolute bottom-6 left-6 right-6 liquid-glass rounded-2xl p-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 z-20">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold text-white">Ver Especificações</span>
+                  <ArrowRight size={18} className="text-orange-500" />
+                </div>
+              </div>
+
+              {/* Sold Overlays on images effect */}
+              {product.status === 'vendido' && (
+                <div className="absolute inset-0 bg-zinc-950/40 backdrop-grayscale flex items-center justify-center z-10">
+                  <div className="border-4 border-zinc-500/30 p-4 rounded-full opacity-20">
+                    <Tag size={80} weight="thin" className="text-zinc-100" />
+                  </div>
+                </div>
+              )}
             </div>
             
-            <div className="flex items-center justify-between px-2">
-              <div>
-                <p className="text-sm text-zinc-500 mb-1">{product.category}</p>
-                <p className="text-lg font-medium text-zinc-100">{product.name}</p>
+            <div className="px-2">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-tighter flex items-center gap-1">
+                  <div className={`w-1 h-1 rounded-full ${product.status === 'disponivel' ? 'bg-orange-500' : 'bg-zinc-600'}`} />
+                  Postado em: {new Date(product.date).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })}
+                </span>
+                <p className="text-xs font-medium text-zinc-400">{product.category}</p>
               </div>
-              <p className="text-lg font-mono text-zinc-400">{product.price}</p>
+              <div className="flex items-center justify-between">
+                <h4 className="text-lg font-medium text-zinc-100 group-hover:text-orange-500 transition-colors">{product.name}</h4>
+                <p className="text-lg font-mono font-bold text-zinc-100">{product.price}</p>
+              </div>
             </div>
           </motion.div>
         ))}
