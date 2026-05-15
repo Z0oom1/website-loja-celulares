@@ -133,8 +133,8 @@ const Hero = () => {
               </div>
               
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tighter leading-[0.95] text-zinc-100">
-                Engenharia de precisão.<br />
-                <span className="text-zinc-500">Restaurado à vida.</span>
+                Especialista em iPhone.<br />
+                <span className="text-zinc-500">Conserto e Vendas.</span>
               </h1>
               
               <p className="text-lg md:text-xl text-zinc-400 max-w-[35ch] leading-relaxed">
